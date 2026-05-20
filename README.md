@@ -1,68 +1,76 @@
-# OpenTerminal – A Full‑Fledged Bloomberg Terminal Alternative
+# OpenTerminal (The Hummingbird Project)
 
-> **Disclaimer** – This project is a **conceptual blueprint** for educational purposes. Building a production‑grade Bloomberg Terminal requires billions in data licensing, regulatory compliance, and infrastructure. This README outlines a **minimal viable architecture** for an open‑source, single‑asset class, delayed‑data terminal.
+> **A High-Density, Cinematic Trading Terminal Blueprint**
 
-## Table of Contents
-- [Overview](#overview)
-- [Project Scope & Constraints](#project-scope--constraints)
-- [Features](#features)
-- [System Architecture](#system-architecture)
-- [Technology Stack](#technology-stack)
-- [Getting Started](#getting-started)
-- [Roadmap](#roadmap)
-- [Challenges & Trade‑offs](#challenges--trade-offs)
-- [Contributing](#contributing)
-- [License](#license)
+OpenTerminal is an open-source architectural blueprint for building a professional, high-performance financial desktop application. It is designed to mimic the core user experience of top-tier trading platforms (like Interactive Brokers TWS or Bloomberg) using modern web technologies. 
+
+## 🚀 The Vision
+
+The goal is to demystify complex financial UI/UX and provide a learning sandbox for financial engineers, developers, and designers. 
+
+The terminal utilizes a dark, cinematic aesthetic—deep slate backgrounds, high-contrast typography (green/red indicators), and information-dense panels that can be arranged and interacted with via a keyboard-driven command palette.
+
+## 🏗️ System Architecture
+
+The project is split into a high-performance Single Page Application (SPA) frontend and an asynchronous Python backend.
+
+### 1. Frontend (React) - *Planned*
+*   **Grid Workspace**: Resizable, drag-and-drop panels.
+*   **Modules**:
+    *   **Charts**: Interactive candlestick and volume charts via TradingView Lightweight Charts.
+    *   **Watchlist**: Real-time data grid for streaming quotes.
+    *   **Order Entry**: A mock trade submission ticket.
+    *   **Activity**: Open orders and portfolio tracking.
+    *   **News**: Streaming financial headlines.
+
+### 2. Backend (FastAPI)
+The backend acts as a high-speed data router and mock execution engine.
+*   **API Gateway**: Standard REST endpoints for historical data and configuration.
+*   **WebSocket Manager**: Pushes live quotes, order updates, and news to the frontend.
+*   **Market Data Service**: Integrates with free-tier APIs (e.g., Yahoo Finance, Polygon) for quotes and historical bars.
+*   **Order Management System (OMS)**: Simulates trade execution and portfolio state.
+
+## 💻 Technology Stack
+
+*   **Frontend**: React (Vite), Tailwind CSS, Zustand (State), React-Grid-Layout
+*   **Backend**: Python, FastAPI, Uvicorn, WebSockets
+*   **Data Sources**: `yfinance` (MVP mock data), standard REST/RSS feeds.
+*   **Database**: SQLite (MVP) migrating to PostgreSQL.
+
+## 🛠️ Getting Started (Backend)
+
+We are currently scaffolding the backend architecture. 
+
+### Prerequisites
+*   Python 3.9+
+
+### Setup
+
+1.  Navigate to the backend directory:
+    ```bash
+    cd backend
+    ```
+
+2.  Install dependencies:
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+3.  Start the FastAPI Server:
+    ```bash
+    uvicorn main:app --reload
+    ```
+    The server will start at `http://localhost:8000`. You can view the API documentation at `http://localhost:8000/docs`.
+
+## 🗺️ Roadmap
+
+- [x] Define System Architecture & Modules
+- [x] Scaffold FastAPI Backend Engine
+- [ ] Implement WebSocket Manager for streaming quotes
+- [ ] Scaffold React (Vite) Frontend with Tailwind
+- [ ] Build Chart & Watchlist Panel UI
+- [ ] Integrate mock OMS (Order Management System)
+- [ ] Build global Command Bar (Omnibox)
 
 ---
-
-## Overview
-
-**OpenTerminal** is an attempt to build a **modular, extensible financial desktop application** that mimics the core user experience of a Bloomberg Terminal – real‑time market data, news aggregation, basic analytics, and a messaging layer – but within a realistic budget and legal framework for a research project or early‑stage fintech.
-
-**Why?** To demystify the complexity of professional trading platforms and provide a learning sandbox for financial engineers, data scientists, and UI/UX designers.
-
----
-
-## Project Scope & Constraints
-
-To keep the project feasible, we **intentionally limit** the scope:
-
-| Constraint | Decision |
-|------------|----------|
-| **Asset class** | US equities only (NASDAQ, NYSE) |
-| **Data timeliness** | 15‑minute delayed (free from IEX Cloud / Polygon.io free tier) |
-| **User count** | Single user / local deployment only |
-| **Messaging** | Optional – WebSocket chat with no compliance auditing (for demo only) |
-| **Real‑time infrastructure** | Single machine (no distributed streaming) |
-| **Regulatory** | No real trading, no order execution – analytics only |
-
-> 💡 A **production** terminal would require live data licensing (costing >$50M/year), colocation, 24/7 support, and regulatory approval.
-
----
-
-## Features
-
-### Core (MVP)
-- [x] Live (delayed) price quotes for 10,000+ US stocks  
-- [x] Interactive charts (candlestick, volume, indicators)  
-- [x] News feed – aggregated from free RSS (Yahoo Finance, SEC EDGAR)  
-- [x] Basic screeners (e.g., P/E ratio, 52‑week high)  
-- [x] Excel add‑in – fetch stock prices via WebSocket  
-- [x] Keyboard‑driven command palette (like Bloomberg’s `GO`)
-
-### Advanced (Phase 2)
-- [ ] Historical tick database (PostgreSQL + TimescaleDB)  
-- [ ] Simple portfolio VaR (variance‑covariance method)  
-- [ ] Earnings sentiment analysis (using Hugging Face transformers)  
-- [ ] Web version (React + FastAPI)
-
-### Stretch Goals
-- [ ] Real‑time chat (no persistence)  
-- [ ] Options pricing (Black‑Scholes calculator)  
-- [ ] Dark mode
-
----
-
-## System Architecture
-
+*Disclaimer: This project is for educational purposes only. It does not connect to real brokerage accounts and uses delayed/mock data.*
