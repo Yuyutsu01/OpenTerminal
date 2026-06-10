@@ -140,6 +140,10 @@ class MarketDataService:
         Fetches a single ticker using yfinance.
         If it fails or returns empty, falls back to default values.
         """
+        import os
+        if os.environ.get("MOCK_MARKET") == "true":
+            default_val, default_chg = self.default_prices.get(ticker, (100.0, 0.0))
+            return default_val, default_chg
         try:
             # Wrap yfinance call in asyncio thread pool executor
             loop = asyncio.get_event_loop()
