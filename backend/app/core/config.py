@@ -15,6 +15,11 @@ class Settings(BaseSettings):
     OPENAI_API_KEY: str | None = None
     ANTHROPIC_API_KEY: str | None = None
     
+    # Local Ollama LLM settings
+    OLLAMA_BASE_URL: str = "http://127.0.0.1:11434"
+    OLLAMA_MODEL: str = "llama3.2:latest"
+    USE_OLLAMA: bool = True
+    
     # Environment config
     model_config = SettingsConfigDict(
         env_file=".env",
